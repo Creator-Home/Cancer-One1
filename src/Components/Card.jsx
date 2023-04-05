@@ -10,7 +10,7 @@ import {
    
   export default function Example(props) {
     return (
-      <Card  className="border-black-400 w-full max-w-[20rem] p-8 mt-40 mx-10 bg-white-200">
+      <Card  className="border-black-400 w-full p-8 mt-40 mx-10 bg-white-200">
         <CardHeader
           floated={false}
           shadow={false}

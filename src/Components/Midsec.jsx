@@ -14,16 +14,13 @@ function About() {
 
   return (
      <>
-      <div className="flex mx-48 mt-28">
-         
-          <div className="">
+      <div className="">
             <img
               src="src\Components\b-can.png"
               className=" h-auto w-auto"
               alt="App"
               data-scroll-reveal="enter left move 30px over 0.6s after 0.4s"
             />
-          </div>
            
             <div className="mx-8">
               <h5  className='font-bold text-pink-500 text-2xl'>Tools and Technology</h5>

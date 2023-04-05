@@ -1,45 +1,40 @@
 import React from 'react';
-import '../index.css';
 
-function Navbar() {
+//import logo from 'src/Components/icon.png';
+
+function Header() {
   return (
-    <> 
-    {/* <div className="absolute w-1447 h-42 left-7 top-0 flex">
-      <ul>
-        <li className='absolute w-169 h-19 left-166 top-12 font-sans font-normal text-base leading-19 text-black'>Free 14-days B-Care guide</li>
-        <li className='absolute w-169 h-19 left-166 top-12 font-sans font-normal text-base leading-19 text-black'>Upgrade</li>
-        <li className='absolute w-44 h-19 left-1097 top-11 font-sans font-normal font-medium text-base leading-5 text-blue-600'>Signin</li>
-      </ul>
-    </div> */}
-    <nav className="border-b  border-solid flex items-center justify-between flex-wrap bg-white-800 p-3">
-      <div className="flex items-center flex-shrink-0 text-pink-500 mr-6">
-        <span className="font-semibold text-xl text-pink-500  tracking-tight">B-Care</span>
-      </div>
-       
-      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-        <div className="text-sm lg:flex-grow lg:text-right">
-          <a href="#responsive-header" className=" font-bold block mt-4 lg:inline-block lg:mt-0 text-bold text-pink-500  hover:text-black mr-4">
-            Doctor
-          </a>
-          <a href="#responsive-header" className="font-bold block mt-4 lg:inline-block lg:mt-0 text-bold text-pink-500  hover:text-black mr-4">
-            Users
-          </a>
-          <a href="#responsive-header" className="font-bold  block mt-4 lg:inline-block lg:mt-0 text-bold text-pink-500  hover:text-black mr-0 lg:mr-4">
-            Blogs
-          </a>
-          <a href="#responsive-header" className="font-bold  block mt-4 lg:inline-block lg:mt-0 text-bold text-pink-500  hover:text-black mr-0 lg:mr-4">
-             Test
-          </a>
-        </div>
-        <div>
-          <a href="#" className="inline-block text-sm px-4 py-2 leading-none border rounded text-blue border-blue 
-          hover:border-b
-           hover:text-white-500 hover:bg-pink-500 mt-4 lg:mt-0 mr-4">Login</a>
+    <header className="header-area header-sticky" style={{ background: 'white' }}>
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <nav className="main-nav">
+              {/* ** Logo Start ** */}
+              <a href="#" className="logo"><img src="assets\images\Stree_logo.png"width="80" height="80" alt="B-Care"/></a>
+              {/* ** Logo End ** */}
+              {/* ** Menu Start ** */}
+              <ul className="nav">
+                <li className="scroll-to-section"><a href="#welcome" className="active">Home</a></li>
+                <li className="scroll-to-section"><a href="#about">About</a></li>
+                <li className="submenu">
+                  <a href="javascript:;">Features</a>
+                  <ul>
+                    <li><a href="consult-doc.html">Consult a Doc</a></li>
+                    <li><a href="#about2">Estimate Cancer</a></li>
+                  </ul>
+                </li>
+                <li className="scroll-to-section"><a href="#future">Future Plan</a></li>
+                <li className="scroll-to-section"><a href="#frequently-question">Breast Exam</a></li>
+                <li className="scroll-to-section"><a href="#">Login/Signup</a></li>
+                <li className="scroll-to-section"><a href="#contact-us">Contact Us</a></li>
+              </ul>
+              {/* ** Menu End ** */}
+            </nav>
+          </div>
         </div>
       </div>
-    </nav>
-    </>
+    </header>
   );
 }
 
-export default Navbar;
+export default Header;

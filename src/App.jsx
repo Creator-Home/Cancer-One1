@@ -6,7 +6,7 @@ import Cards from './Components/Cards';
  
 // import Footer from './Components/Footer';
 // import Home from './Components/Home';
-// import Navbar from './Components/Navbar';
+import Navbar from './Components/Navbar';
 // import Midsec from './Components/Midsec';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -24,7 +24,7 @@ function App() {
      
        <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-         {/* <Navbar/> */}
+         <Navbar/>
          <Banner/>
          <div className='flex mx-16'>
          <Card step = "Step-1"/>

@@ -34,29 +34,29 @@ $('.metastatic-cancer').hide();
 
 // This change event fires when the met_cancer option is selected.
 // Hide the Breast Cancer Analyzer text
-$('#met_cancer_input').change(function(){
-	
+$('#met_cancer_input').change(function () {
+
 	//console.log('met_cancer');
-	
+
 	MET_CANCER_MODEL_SELECTED = 'yes';
 	BREAST_CANCER_MODEL_SELECTED = 'no';
-	
+
 	// Show the message saying which analyzer is active.
 	$('.breast-cancer').hide();
 	$('.metastatic-cancer').show();
-	
+
 });
 
 // This change event fires when the breast_cancer option is selected.
 // Hide the Metastatic Cancer Analyzer text
-$('#breast_cancer_input').change(function(){
-	
+$('#breast_cancer_input').change(function () {
+
 	//console.log('breast_cancer');
-	
+
 	MET_CANCER_MODEL_SELECTED = 'no';
 	BREAST_CANCER_MODEL_SELECTED = 'yes';
-	
-	
+
+
 	// Show the message saying which analyzer is active.
 	$('.metastatic-cancer').hide();
 	$('.breast-cancer').show();
@@ -85,40 +85,40 @@ $('#breast_cancer_input').change(function(){
 
 let breast_cancer_model;
 (async function () {
-	
+
 	breast_cancer_model = await tf.loadModel('https://priyanshisharma.github.io/stree/idc_model_v1/model.json');
 	$("#selected-image").attr("src", "https://priyanshisharma.github.io/stree/assets/normal.png");
-	
+
 })();
 
-	
+
 
 
 // MET CANCER MODEL
 
 let met_cancer_model;
 (async function () {
-	
+
 	met_cancer_model = await tf.loadModel('https://priyanshisharma.github.io/stree/metastatic_model_v1/model.json');
 	$("#selected-image").attr("src", "https://priyanshisharma.github.io/stree/assets/normal.png");
-	
+
 	// Hide the model loading spinner
 	$('.progress-bar').hide();
-	
+
 	// Show the met cancer text indicating that the met cancer model is active
 	$('.metastatic-cancer').show();
 	// Hide the breast cancer text indicating that the breast cancer model is active
 	$('.breast-cancer').hide();
-	
+
 	// Simulate a click on the predict button.
 	// Make a prediction on the default front page image.
 	met_cancer_predictOnLoad();
-	
+
 })();
 
 
 
-	
+
 
 //######################################################################
 
@@ -130,7 +130,7 @@ let met_cancer_model;
 // Thus, the user will see predictions when the page is first loaded.
 
 function simulateClick(tabID) {
-	
+
 	document.getElementById(tabID).click();
 }
 
@@ -139,9 +139,9 @@ function simulateClick(tabID) {
 
 
 function met_cancer_predictOnLoad() {
-	
+
 	// Simulate a click on the predict button
-	setTimeout(simulateClick.bind(null,'predict-button'), 500);
+	setTimeout(simulateClick.bind(null, 'predict-button'), 500);
 }
 
 
@@ -149,19 +149,19 @@ function met_cancer_predictOnLoad() {
 // This make a met_cancer prediction when the page loads.
 // met cancer model images have size 96x96
 $("#predict-button").click(async function () {
-	
+
 	let image = undefined;
-	
+
 	image = $('#selected-image').get(0);
-	
+
 	// Pre-process the image
 	let tensor = tf.fromPixels(image)
-	.resizeNearestNeighbor([96,96]) // change the image size here
-	.toFloat()
-	.div(tf.scalar(255.0))
-	.expandDims();
-	
-	
+		.resizeNearestNeighbor([96, 96]) // change the image size here
+		.toFloat()
+		.div(tf.scalar(255.0))
+		.expandDims();
+
+
 	// Pass the tensor to the model and call predict on it.
 	// Predict returns a tensor.
 	// data() loads the values of the output tensor and returns
@@ -174,27 +174,27 @@ $("#predict-button").click(async function () {
 				probability: p,
 				className: MET_CANCER_CLASSES[i]
 			};
-				
-			
+
+
 		}).sort(function (a, b) {
 			return b.probability - a.probability;
-				
-		}).slice(0, 2);
-	
 
-		// Append the file name to the prediction list
-		var file_name = 'default_image.jpg';
-		$("#prediction-list").append(`<li class="w3-text-teal">${file_name}</li>`);
-		
-		//$("#prediction-list").empty();
-		top5.forEach(function (p) {
-		
-			$("#prediction-list").append(`<ol>${p.className}: ${p.probability.toFixed(6)}</ol>`);
-		
-			
-		});
-	
-	
+		}).slice(0, 2);
+
+
+	// Append the file name to the prediction list
+	var file_name = 'default_image.jpg';
+	$("#prediction-list").append(`<li class="w3-text-teal">${file_name}</li>`);
+
+	//$("#prediction-list").empty();
+	top5.forEach(function (p) {
+
+		$("#prediction-list").append(`<ol>${p.className}: ${p.probability.toFixed(6)}</ol>`);
+
+
+	});
+
+
 });
 
 
@@ -213,35 +213,35 @@ $("#predict-button").click(async function () {
 // This listens for a change. It fires when the user submits images.
 
 $("#image-selector").change(async function () {
-	
+
 	// if the met cancer radio button was selected
 	// The variable value was set above by a change event.
 	if (MET_CANCER_MODEL_SELECTED === 'yes') {
-	
+
 		// the FileReader reads one image at a time
 		fileList = $("#image-selector").prop('files');
-		
+
 		//$("#prediction-list").empty();
-		
+
 		// Start predictiing
 		met_processArray(fileList);
 	}
-	
+
 	// if the breast cancer radio button was selected
 	// The variable value was set above by a change event.
 	if (BREAST_CANCER_MODEL_SELECTED === 'yes') {
-	
+
 		// the FileReader reads one image at a time
 		fileList = $("#image-selector").prop('files');
-		
+
 		//$("#prediction-list").empty();
-		
+
 		// Start predictiing
 		breast_processArray(fileList);
 	}
-    
 
-	
+
+
 });
 
 
